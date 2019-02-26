@@ -40,15 +40,14 @@ output_array=[np.zeros(input_neuron),np.zeros(hidden_neuron+1),np.zeros(output_n
 output_array[0]=x[0]
 l=len(x)
 x_copy=x;
-print("shaape",len(x[0]))
-print("input",input_array)
+# print("shaape",len(x[0]))
+# print("input",input_array)
 for i in range(total_layer-1):
-	print("iiiiiiii",i)
 	# print(" weight ",weight[i]," output_array 123",output_array[i])
 	input_array[i+1]=np.dot(np.array(weight[i]),np.transpose(output_array[i]))
-	print("input_array ",input_array[i+1])
+	# print("input_array ",input_array[i+1])
 	temp=np.array(activation(input_array[i+1]))
-	print("temp",temp)
+	# print("temp",temp)
 	output_array[i+1]=temp
-	print("shaoe",output_array[i+1].shape)
+	# print("shaoe",output_array[i+1].shape)
 	print("output_array",output_array[i+1])
