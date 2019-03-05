@@ -3,7 +3,7 @@ import pandas as pd
 
 def sigmoid(z):
 	
-	val=1/1+exp(-z)
+	val=1/1+np.exp(-z)
 	return val
 
 def load_dataset():
@@ -12,11 +12,12 @@ def load_dataset():
 	x=dataset.iloc[:,:-1].values
 	y=dataset.iloc[:,columns-1].values
 	print(x.shape)
+	print(y)
 	return x,y
 
 def linear_activation_backward(da,z,activation,m):
 	if activation=="relu":
-
+		print("relu")
 
 	elif activation=="sigmoid":
 		dz=da*sigmoid(z)
@@ -24,11 +25,11 @@ def linear_activation_backward(da,z,activation,m):
 
 def initialize_weight():
 
-	w1=np.random.rand((2,2))
-	b1=np.random.rand((2,4))
+	w1=np.random.rand(2,2)
+	b1=np.random.rand(2,4)
 
-	w2=np.random.rand((1,2))
-	b2=np.random.rand((1,4))
+	w2=np.random.rand(1,2)
+	b2=np.random.rand(1,4)
 
 	return w1,b1,w2,b2
 
@@ -36,6 +37,7 @@ def initialize_weight():
 def apply_alogrithm(x,m,learning_rate,max_iterations):
 	
 	w1,b1,w2,b2=initialize_weight()
+	# print(w1,b1,w2,b2)
 	x=x.T
 	costs=[]
 	for i in range(max_iterations):
@@ -50,19 +52,19 @@ def apply_alogrithm(x,m,learning_rate,max_iterations):
 
 		#Backward propagation
 
-		da2=-(np.divide(y,a2)-np.divide(1-y,1-a2)
+		da2=-(np.divide(y,a2)-np.divide(1-y,1-a2))
 
-		cost = (-1 / m) * np.sum(np.multiply(y, np.log(a2)) + np.multiply(1 - y, np.log(1 - a2)))
+		cost = (-1 / m) * np.sum(np.multiply(y, np.log(a2)) + np.multiply(1-y, np.log(1-a2)))
 
-		dz2=da2*sigmoid(z2)
+		dz2=da2 * sigmoid(z2)
 		dw2=(np.dot(dz2,a1.T))/m
-		db2=np.sum(dz2,asix=1,keepdims=True)
+		db2=np.sum(dz2,axis=1,keepdims=True)
 		da1=np.dot(w2.T,dz2)
 
 
 		dz1=da1*sigmoid(z1)
 		dw1=(np.dot(dz1,x))/m
-		db1=np.sum(dz1,asix=1,keepdims=True)
+		db1=np.sum(dz1,axis=1,keepdims=True)
 		da0=np.dot(w1.T,dz1)
 
 		# weight updation of first layer
