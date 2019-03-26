@@ -38,7 +38,7 @@ print("x_test",x_test)
 print("y_train",y_train)
 print("y_test",y_test)
 
-total_positive_class=np.count_nonzero(1)
+total_positive_class=np.count_nonzero(y==1)
 total_negative_class=m - total_positive_class
 
 def cal_conditional_prob(feature_column_index,value,class_type,x,y):
